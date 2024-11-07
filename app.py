@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # Function to generate HTML, CSS, and JS files with checkboxes and rearranging functionality
-def generate_website_from_csv(file_path, output_folder='output_website'):
+def generate_website_from_csv(file_path):
     # Read the CSV file
     try:
         df = pd.read_csv(file_path)
@@ -11,9 +11,6 @@ def generate_website_from_csv(file_path, output_folder='output_website'):
     except Exception as e:
         print(f"Error reading CSV file: {e}")
         return
-    
-    # Ensure output directory exists
-    os.makedirs(output_folder, exist_ok=True)
 
     # Generate HTML content with checkboxes and rearranging functionality
     html_content = f"""
@@ -29,7 +26,7 @@ def generate_website_from_csv(file_path, output_folder='output_website'):
     </head>
     <body>
         <div class="container">
-            <h1>Schools Phone Directory</h1>
+            <h1>Schools Phone Directory</h1> <!-- Title placed above the list with spacing -->
             <div class="school-list">
     """
     
@@ -53,8 +50,8 @@ def generate_website_from_csv(file_path, output_folder='output_website'):
     </html>
     """
     
-    # Write HTML file
-    with open(os.path.join(output_folder, 'index.html'), 'w', encoding='utf-8') as file:
+    # Write HTML file in the same directory
+    with open('index.html', 'w', encoding='utf-8') as file:
         file.write(html_content)
 
     # Generate CSS content
@@ -69,6 +66,7 @@ def generate_website_from_csv(file_path, output_folder='output_website'):
         justify-content: center;
         align-items: center;
         height: 100vh;
+        flex-direction: column; /* Center content vertically */
     }
 
     .container {
@@ -82,29 +80,22 @@ def generate_website_from_csv(file_path, output_folder='output_website'):
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
+    /* Title for the list */
     h1 {
         text-align: center;
-        font-size: 35px;
+        font-size: 32px;
         color: #333;
-        margin-bottom: 30px;
+        margin-top: 30px; /* Space from the top */
         font-weight: 700;
         letter-spacing: 1px;
     }
 
-    /* Title for the list */
-    .list-title {
-        font-size: 30px;
-        font-weight: bold;
-        color: #007bff;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    /* Styling for the school list */
+    /* School list container */
     .school-list {
         display: flex;
         flex-direction: column;
         gap: 15px;
+        margin-top: 30px; /* Space from the title */
     }
 
     /* School item styling */
@@ -195,8 +186,8 @@ def generate_website_from_csv(file_path, output_folder='output_website'):
     }
     """
     
-    # Write CSS file
-    with open(os.path.join(output_folder, 'styles.css'), 'w', encoding='utf-8') as file:
+    # Write CSS file in the same directory
+    with open('styles.css', 'w', encoding='utf-8') as file:
         file.write(css_content)
 
     # Generate JavaScript content to handle checkbox and move completed calls
@@ -223,11 +214,11 @@ def generate_website_from_csv(file_path, output_folder='output_website'):
     });
     """
     
-    # Write JavaScript file
-    with open(os.path.join(output_folder, 'script.js'), 'w', encoding='utf-8') as file:
+    # Write JavaScript file in the same directory
+    with open('script.js', 'w', encoding='utf-8') as file:
         file.write(js_content)
 
-    print(f"Website files generated successfully in the '{output_folder}' directory.")
+    print("Website files generated successfully in the current directory.")
 
 # Replace 'schools.csv' with the path to your CSV file
 generate_website_from_csv('schools.csv')

@@ -9,6 +9,7 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
+        flex-direction: column; /* Center content vertically */
     }
 
     .container {
@@ -22,29 +23,22 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
+    /* Title for the list */
     h1 {
         text-align: center;
-        font-size: 35px;
+        font-size: 32px;
         color: #333;
-        margin-bottom: 30px;
+        margin-top: 30px; /* Space from the top */
         font-weight: 700;
         letter-spacing: 1px;
     }
 
-    /* Title for the list */
-    .list-title {
-        font-size: 30px;
-        font-weight: bold;
-        color: #007bff;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    /* Styling for the school list */
+    /* School list container */
     .school-list {
         display: flex;
         flex-direction: column;
         gap: 15px;
+        margin-top: 30px; /* Space from the title */
     }
 
     /* School item styling */
