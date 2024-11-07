@@ -85,7 +85,7 @@ def generate_website_from_csv(file_path):
         text-align: center;
         font-size: 32px;
         color: #333;
-        margin-top: 30px; /* Space from the top */
+        margin-top: 200px; /* Space from the top */
         font-weight: 700;
         letter-spacing: 1px;
     }
