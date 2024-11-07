@@ -1,18 +1,18 @@
 import pandas as pd
+import os
 
-# Function to generate HTML, CSS, and JS files
-def generate_website_from_excel(file_path, output_folder='output_website'):
-    # Read the Excel file
+# Function to generate HTML, CSS, and JS files from a CSV
+def generate_website_from_csv(file_path, output_folder='output_website'):
+    # Read the CSV file
     try:
-        df = pd.read_excel(file_path)
+        df = pd.read_csv(file_path)
         if 'School Name' not in df.columns or 'Phone Number' not in df.columns:
-            raise ValueError('The Excel file must have "School Name" and "Phone Number" columns')
+            raise ValueError('The CSV file must have "School Name" and "Phone Number" columns')
     except Exception as e:
-        print(f"Error reading Excel file: {e}")
+        print(f"Error reading CSV file: {e}")
         return
     
     # Ensure output directory exists
-    import os
     os.makedirs(output_folder, exist_ok=True)
 
     # Generate HTML content
@@ -89,5 +89,5 @@ def generate_website_from_excel(file_path, output_folder='output_website'):
 
     print(f"Website files generated successfully in the '{output_folder}' directory.")
 
-# Replace 'schools.xlsx' with the path to your Excel file
-generate_website_from_excel('schools.xlsx')
+# Replace 'schools.csv' with the path to your CSV file
+generate_website_from_csv('schools.csv')
