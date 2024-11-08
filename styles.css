@@ -2,7 +2,7 @@
     /* General Body and Layout */
     body {
         font-family: 'Poppins', sans-serif;
-        background-color: #a8d0e6; /* Mild background color */
+        background-color: #f3f6fb; /* Mild background color */
         margin: 0;
         padding: 0;
         display: flex;
@@ -28,7 +28,7 @@
         text-align: center;
         font-size: 32px;
         color: #333;
-        margin-top: 200px; /* Space from the top */
+        margin-top: 200px; /* Space from the top for visibility */
         font-weight: 700;
         letter-spacing: 1px;
     }

@@ -1,5 +1,4 @@
 import pandas as pd
-import os
 
 # Function to generate HTML, CSS, and JS files with checkboxes and rearranging functionality
 def generate_website_from_csv(file_path):
@@ -26,7 +25,7 @@ def generate_website_from_csv(file_path):
     </head>
     <body>
         <div class="container">
-            <h1>Schools Phone Directory</h1> <!-- Title placed above the list with spacing -->
+            <h1>Schools Phone Directory</h1> <!-- Title placed above the list with 200px spacing -->
             <div class="school-list">
     """
     
@@ -59,7 +58,7 @@ def generate_website_from_csv(file_path):
     /* General Body and Layout */
     body {
         font-family: 'Poppins', sans-serif;
-        background-color: #a8d0e6; /* Mild background color */
+        background-color: #f3f6fb; /* Mild background color */
         margin: 0;
         padding: 0;
         display: flex;
@@ -85,7 +84,7 @@ def generate_website_from_csv(file_path):
         text-align: center;
         font-size: 32px;
         color: #333;
-        margin-top: 200px; /* Space from the top */
+        margin-top: 200px; /* Space from the top for visibility */
         font-weight: 700;
         letter-spacing: 1px;
     }
@@ -190,24 +189,41 @@ def generate_website_from_csv(file_path):
     with open('styles.css', 'w', encoding='utf-8') as file:
         file.write(css_content)
 
-    # Generate JavaScript content to handle checkbox and move completed calls
+    # Generate JavaScript content to handle checkbox and move completed calls with localStorage functionality
     js_content = """
     document.addEventListener('DOMContentLoaded', function () {
         const checkboxes = document.querySelectorAll('.call-checkbox');
+        const schoolList = document.querySelector('.school-list');
 
+        // Load saved checkbox states from localStorage and reorder the list
+        checkboxes.forEach(checkbox => {
+            const index = checkbox.dataset.index;
+            const savedState = localStorage.getItem(`checkbox-${index}`);
+
+            const schoolItem = document.getElementById('school-' + index);
+
+            if (savedState === 'checked') {
+                checkbox.checked = true;
+                schoolItem.classList.add('completed');
+                schoolList.appendChild(schoolItem);  // Move to the end of the list
+            }
+        });
+
+        // Add event listener for checkbox change
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', function () {
                 const schoolItem = document.getElementById('school-' + this.dataset.index);
-                const schoolList = document.querySelector('.school-list');
 
                 if (this.checked) {
-                    // Move completed item to the end of the list
+                    // Move completed item to the end of the list and save the state
                     schoolItem.classList.add('completed');
                     schoolList.appendChild(schoolItem);
+                    localStorage.setItem(`checkbox-${this.dataset.index}`, 'checked');
                 } else {
-                    // Move unchecked item back to the top
+                    // Move unchecked item back to the top and save the state
                     schoolItem.classList.remove('completed');
                     schoolList.insertBefore(schoolItem, schoolList.firstChild);
+                    localStorage.setItem(`checkbox-${this.dataset.index}`, 'unchecked');
                 }
             });
         });
