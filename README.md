@@ -39,9 +39,13 @@ python generator.py
 - Open `index.html` in a browser to access all directories.  
 
 ## 📝 CSV Format Example  
+
 School Name,Phone Number
+
 Green Valley High,9876543210
+
 Sunrise Academy,8765432109
+
 Blue Ridge School,7654321098
 
 
